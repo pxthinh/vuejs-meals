@@ -21,7 +21,6 @@ const meals = computed(() => store.state.meals);
 const letters = "ABCDEFGHIKLMN".split('');
 
 onMounted(async () => {
-    const reponse = await axiosClient.get('/list.php?i=list')
-    console.log(reponse.data);
-});
+    const response = await axiosClient.get('/list.php?i=list')
+``});
 </script>
