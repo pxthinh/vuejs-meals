@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="max-w-[800px] mx-auto p-8">
         <pre>{{ meal }}</pre>
         <h1 class="text-5xl font-bold mb-5">{{ meal.strMeal }}</h1>
         <img 
         :src="meal.strMealThumb" 
         :alt="meal.strMeal"
+        class="max-w-[100%]"
         >
         <div class="grid grid-cols-1 md:grid-cols-3 text-lg py-2">
             <div>
@@ -17,6 +18,39 @@
                <strong class="font-bold">Tags:</strong>  {{ meal.strTags }}
             </div>
         </div>
+
+        <div class="my-3">
+          {{ meal.strInstructions }}
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2">
+          <div>
+            <h2 class="text-2x1 font-semibold mb-3">Ingredients</h2>
+            <ul>
+              <template v-for="(el, ind) of new Array(20)">
+                <li v-if="meal[`strIngredient${ind + 1}`]">
+                  {{ind + 1}}. {{ meal[`strIngredient${ind + 1}`] }}
+                </li>
+              </template>
+            </ul>
+          </div>
+          <div>
+            <h2 class="text-2x1 font-semibold mb-3">Measures</h2>
+            <ul>
+              <template v-for="(el, ind) of new Array(20)">
+                <li v-if="meal[`strMeasure${ind + 1}`]">
+                  {{ind + 1}}. {{ meal[`strMeasure${ind + 1}`] }}
+                </li>
+              </template>
+            </ul>
+          </div>
+          <div class="mt-4">
+              <YoutubeButton :href="meal.strYoutube">Youtube</YoutubeButton>
+              <a to="/" class="ml-3 px-3 py-2 rounded border-2 border-transparent border-purple-600 bg-purple-500 hover:text-white transition-colors">
+                    View Original Source
+              </a>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -24,6 +58,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axiosClient from '../axiosClient';
+import YoutubeButton from '../components/YoutubeButton.vue';
 
 const meal = ref({});
 const route = useRoute();
