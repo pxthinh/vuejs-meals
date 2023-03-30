@@ -7,5 +7,10 @@ export function setMealsByLetter(state, letters){
 }
 
 export function setMealsByIngredient(state, ingredients){
+    console.log(ingredients);
     state.mealsByIngredient = ingredients || [];
 }
+
+export function setIngredient(state, ingredient) {
+    state.ingredient = ingredient
+  }
